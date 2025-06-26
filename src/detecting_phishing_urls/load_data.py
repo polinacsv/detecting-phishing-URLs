@@ -43,8 +43,9 @@ def load_alexa_domains(data_dir: str, filename: str) -> pd.DataFrame:
         filename (str): Name of the .txt file (e.g., 'alexa_domains_1M.txt')
 
     Returns:
-        pd.DataFrame: DataFrame with a single column 'alexa_domain'
+        pd.DataFrame: DataFrame with columns ['alexa_domain', 'rank']
     """
     file_path = os.path.join(data_dir, filename)
     df = pd.read_csv(file_path, header=None, names=['alexa_domain'])
+    df['rank'] = df.index + 1  # 1-based rank based on file order
     return df
